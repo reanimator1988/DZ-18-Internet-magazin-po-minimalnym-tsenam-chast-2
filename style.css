@@ -5,6 +5,10 @@ h1 {
 	padding-top: 25px;
 }
 
+.container {
+	min-height: 500px;
+}
+
 .root-nav {
 	margin: 110px 0 0 100px;
 	width: 160px;
@@ -80,6 +84,8 @@ h3 {
 }
 
 .order-popup {
+
+	position: relative;
 	background-color: #574f4f;
 	color: white;
 	margin: 10% auto;
@@ -89,11 +95,21 @@ h3 {
   }
 
   .information {
+	position: relative;
 	background-color: #574f4f;
 	color: white;
 	margin: 10% auto;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 35%;
-
   }
+  
+
+  form button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+  }
+  

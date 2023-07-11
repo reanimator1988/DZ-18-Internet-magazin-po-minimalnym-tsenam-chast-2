@@ -41,7 +41,7 @@ function showOrderForm(event) {
     orderForm.innerHTML = `
         <label>ПІБ покупця:</label>
         <input type="text" name="name" required><br><br>
-        
+
         <label>Місто:</label>
         <select name="city" required>
             <option value="">Виберіть місто</option>
@@ -52,35 +52,35 @@ function showOrderForm(event) {
             <option value="Херсон">Херсон</option>
             <option value="Севастополь">Севастополь</option>
         </select><br><br>
-        
+
         <label>Склад Нової пошти для надсилання:</label>
         <input type="text" name="postOffice" required><br><br>
-        
+
         <label>Спосіб оплати:</label>
         <input type="radio" name="payment" value="Післяплата" required> Післяплата
         <input type="radio" name="payment" value="Оплата банківською карткою" required> Оплата банківською карткою<br><br>
-        
+
         <label>Кількість продукції, що купується:</label>
         <input type="number" name="quantity" required><br><br>
-        
+
         <label>Коментар до замовлення:</label>
         <textarea name="comment"></textarea><br><br>
-        
+
         <button>Підтвердити замовлення</button>
     `;
-    
-    orderForm.addEventListener("button", submitOrder);
-    
+
+    orderForm.addEventListener("submit", submitOrder);
+
     const orderPopup = document.createElement('div');
     orderPopup.classList.add('order-popup');
     orderPopup.appendChild(orderForm);
-    
+
     document.body.appendChild(orderPopup);
 }
 
 function submitOrder(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const name = form.elements.name.value;
     const city = form.elements.city.value;
@@ -88,13 +88,13 @@ function submitOrder(event) {
     const payment = form.elements.payment.value;
     const quantity = form.elements.quantity.value;
     const comment = form.elements.comment.value;
-    
+
     if (name && city && postOffice && payment && quantity) {
       const orderInfo = document.createElement('div');
       orderInfo.classList.add('information');
-    
+
       orderInfo.innerHTML = `
-        <p class="order-info">Інформація про замовлення:</p>
+        <p class="order-info">ІНФОРМАЦІЯ ПРО ЗАМОВЛЕННЯ:</p>
         <p class="order-info">ПІБ покупця: ${name}</p>
         <p class="order-info">Місто: ${city}</p>
         <p class="order-info">Склад Нової пошти для надсилання: ${postOffice}</p>
@@ -102,12 +102,12 @@ function submitOrder(event) {
         <p class="order-info">Кількість продукції: ${quantity}</p>
         <p class="order-info">Коментар: ${comment}</p>
       `;
-      
+
       document.body.appendChild(orderInfo);
-    
-    } else {
-        alert("Будь ласка, заповніть обов'язкові поля");
     }
-    form.closest('.order-popup').remove();
-    
+    const existingPopups = document.querySelectorAll('.order-popup');
+    existingPopups.forEach(popup => {
+        popup.remove();
+    });
 }
+
