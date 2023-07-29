@@ -78,6 +78,19 @@ function showOrderForm(event) {
     document.body.appendChild(orderPopup);
 }
 
+function closeAll() {
+    const subMenus = document.querySelectorAll('.root-nav ul');
+    subMenus.forEach(subMenu => {
+        subMenu.style.display = "none";
+        subMenu.classList.remove('sub-menu-active');
+    });
+
+    const orderPopups = document.querySelectorAll('.order-popup');
+    orderPopups.forEach(popup => {
+        popup.remove();
+    });
+}
+
 function submitOrder(event) {
     event.preventDefault();
 
@@ -90,10 +103,10 @@ function submitOrder(event) {
     const comment = form.elements.comment.value;
 
     if (name && city && postOffice && payment && quantity) {
-      const orderInfo = document.createElement('div');
-      orderInfo.classList.add('information');
+        const orderInfo = document.createElement('div');
+        orderInfo.classList.add('information');
 
-      orderInfo.innerHTML = `
+        orderInfo.innerHTML = `
         <p class="order-info">ІНФОРМАЦІЯ ПРО ЗАМОВЛЕННЯ:</p>
         <p class="order-info">ПІБ покупця: ${name}</p>
         <p class="order-info">Місто: ${city}</p>
@@ -101,13 +114,21 @@ function submitOrder(event) {
         <p class="order-info">Спосіб оплати: ${payment}</p>
         <p class="order-info">Кількість продукції: ${quantity}</p>
         <p class="order-info">Коментар: ${comment}</p>
+        <button id="okButton">ОК</button>
       `;
 
-      document.body.appendChild(orderInfo);
+        document.body.appendChild(orderInfo);
+
+        const okButton = orderInfo.querySelector('#okButton');
+        okButton.addEventListener('click', () => {
+            document.body.removeChild(orderInfo);
+            closeAll();
+        });
+
+        const orderPopup = document.querySelector('.order-popup');
+        orderPopup.remove();
     }
-    const existingPopups = document.querySelectorAll('.order-popup');
-    existingPopups.forEach(popup => {
-        popup.remove();
-    });
 }
+
+const myOrdersButton = document.getElementById("my-orders-button");
 
